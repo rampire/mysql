@@ -169,16 +169,6 @@ module MysqlCookbook
           notifies :restart, "service[#{instance} apparmor]", :immediately
         end
 
-        template '/etc/apparmor.d/usr.sbin.mysqld' do
-          cookbook 'mysql'
-          source 'apparmor/usr.sbin.mysqld.erb'
-          owner 'root'
-          group 'root'
-          mode '0644'
-          action :create
-          notifies :restart, "service[#{instance} apparmor]", :immediately
-        end
-
         template "/etc/apparmor.d/local/mysql/#{instance}" do
           cookbook 'mysql'
           source 'apparmor/usr.sbin.mysqld-instance.erb'
